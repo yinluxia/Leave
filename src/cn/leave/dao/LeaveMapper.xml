@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.leave.dao.LeaveMapper">
+	<!-- 分页查询请假记录信息 -->
+	<select id="getLeaveByPage" resultType="LeaveRecords">
+		SELECT * FROM leaverecords LIMIT #{from},#{pageSize}
+	</select>
+	
+	<!-- 查询请假信息总记录数 -->
+	<select id="getLeaveCount" resultType="int">
+		SELECT COUNT(*) FROM leaverecords
+	</select>
+	
+	<!-- 添加新的请假记录信息 -->
+	<insert id="addLeave" parameterType="LeaveRecords">
+		INSERT INTO leaverecords 
+			(`name`, leaveTime, reason) 
+		VALUES
+			(#{name}, #{leaveTime}, #{reason})
+	</insert>
+	
+	<!-- 根据指定的id删除请假信息 -->
+	<delete id="delLeaveById" parameterType="Integer">
+		DELETE FROM leaverecords WHERE id = #{id}
+	</delete>
+</mapper>
